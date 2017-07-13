@@ -17,81 +17,11 @@
               </ul>
 
               <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="introduction">
-                  <h4>Introduction</h4>
-                  <p>The basic elements of a program are simple to understand, but can be used to create complex
-                    computer programs. In this fun, fast-paced game you try to complete a simple program before
-                    the opponent player.</p>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="cardType">
-                  <h4>Card Types</h4>
-                  <p>There are five types of cards:</p>
-                  <ul>
-                    <li><h5>Instruction</h5>
-                      <p>Instruction cards provide the instructions used to create the
-                        program. The instruction card is always placed on an empty stack, the
-                        cards value will be added to your total on the boolean side of its stack.</p></li>
-                    <li><h5>Repetition</h5>
-                      <p>Repetition cards allow you to repeat an instructions. This will multiply
-                        the value of the repetition card and the instruction card (ex. there is an
-                        I-2 card on the stack, you add an R-3 card, your score for that stack is now 6).
-                        There are also variable Repetition cards (R-x), they allow to choose the value
-                        by adding a Variable card to it. Repetition cards may be played on Instruction
-                        cards or a stack who has been grouped.</p></li>
-                    <li><h5>Group</h5>
-                      <p>A Group card lets you combine the cards of one or more stacks.To group
-                        the cards, the combined value of the stacks must equal the value of
-                        the Group card. A grouped stack cannot be hacked.</p></li>
-                    <li><h5>Variables</h5>
-                      <p>Variable cards are used with the variable Repetition (R-x) cards. You use
-                        these cards to change the number of times an Instruction or Group card repeats.</p></li>
-                    <li><h5>Hack</h5>
-                      <p>Hacking cards allow you to remove one of an opponent’s stack, the
-                        Hack card cannot be used on a grouped stack.</p></li>
-                  </ul>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="gamePlay">
-                  <h4>Game Play</h4>
-                  <p>On your turn, you do the following:</p>
-                  <ul id="gamePlay">
-                    <li>Draw a card from the draw pile.<br/>
-                      ○ If there are no more cards in the draw pile, the discarded pile is shuffled and reused.</li>
-                    <li>Add a card to either the "True" or "False" side.<br/>
-                      ○ If you cannot play a card, discard a card from your hand.</li>
-                    <li>At the end of everyone’s turn, the Boolean coin is flipped to determine the active side.<br/>
-                      ○ If the Boolean coin is “True”, the stacks on the "True" side
-                      are ‘running’ to give your current total.<br/>
-                      ○ If the Boolean coin is “False”, the stacks on the "False" side
-                      are ‘running’ to give your current total.</li>
-                  </ul>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="cardPlayingRules">
-                  <h4>Card Playing Rules</h4>
-                  <ul id="cardPlaying">
-                    <li><h5>Instruction Cards</h5>
-                      <ul><li>Instruction cards are placed to either "True" or "False" side.</li>
-                      </ul></li>
-                    <li><h5>Repetition Cards</h5>
-                      <ul><li>Repetition cards are played on either an Instruction card or a Group card.</li>
-                        <li>A variable Repetition card (R-x) without a variable card counts as an R-1.</li>
-                      </ul></li>
-                    <li><h5>Group Cards</h5>
-                      <ul><li>A Group card combines one or more stack(s) turning it into a single group card on a single stack</li>
-                        <li>Group cards cannot be hacked.</li>
-                      </ul></li>
-                    <li><h5>Variable Cards</h5>
-                      <ul><li>Variable cards can only be played on one Repetition-X card.</li>
-                        <li>Variable cards can be replaced by a Variable card of a higher value. The replaced card
-                          is put in the discard pile. For example, a V-2 card can be replaced by a V-3
-                          card.</li>
-                      </ul></li>
-                  </ul>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="endOfGame">
-                  <h4>End of Game</h4>
-                  <p>The game ends when the Boolean coin is flipped and your ‘running’ program
-                    totals the set score limit or more instructions.</p>
-                </div>
+                <div role="tabpanel" class="tab-pane active" id="introduction"><instructions></instructions></div>
+                <div role="tabpanel" class="tab-pane" id="cardType"><cardType></cardType></div>
+                <div role="tabpanel" class="tab-pane" id="gamePlay"><gameplay></gameplay></div>
+                <div role="tabpanel" class="tab-pane" id="cardPlayingRules"><cardPlaying></cardPlaying></div>
+                <div role="tabpanel" class="tab-pane" id="endOfGame"><endOfGame></endOfGame></div>
               </div>
             </div>
           </div>
@@ -105,9 +35,20 @@
 </template>
 
 <script>
+import InstructionRules from '../externalFiles/InstructionRules.vue'
+import CardTypeRules from '../externalFiles/CardTypesRules.vue'
+import CardPlayingRules from '../externalFiles/CardPlayingRules.vue'
+import GameplayRules from '../externalFiles/GameplayRule.vue'
+import EndOfGameRules from '../externalFiles/EndOfGameRules.vue'
 
   export default {
-
+    components: {
+      'instructions': InstructionRules,
+      'cardType': CardTypeRules,
+      'cardPlaying': CardPlayingRules,
+      'gameplay': GameplayRules,
+      'endOfGame': EndOfGameRules
+    }
   }
 
 </script>
