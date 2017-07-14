@@ -65,58 +65,58 @@ export default {
       modalCards: [],
       tipsToggle: true,
       factsToggle: true,
-      tipsCardSelected:'Did you know?',
+      tipsCardSelected: 'Did you know?',
       tipsInfoText: 'You can toggle on or off this information window by checking the \"FUN FACTS\" box in the top right corner. ' +
       'You can also turn off the tutorials but keep the fun facts by checking the \"TUTORIAL\" box.',
       facts: [
-        'The first high-level programming language was FORTRAN. invented in 1954 by IBM’s John Backus.',
-        'The first computer programmer was a woman',
-        'A \"Hello, World!\" program is often the first program written when learning a new programming language',
-        'Counting starts at 0, not 1'
+//        'The first high-level programming language was FORTRAN. invented in 1954 by IBM’s John Backus.',
+//        'The first computer programmer was a woman',
+//        'A \"Hello, World!\" program is often the first program written when learning a new programming language',
+//        'Counting starts at 0, not 1'
       ]
     }
   },
   computed: {
     colSize() {
-      let size = 12/this.$store.getters.getPlayers.length;
-      return 'col-md-'+size;
+      let size = 12 / this.$store.getters.getPlayers.length;
+      return 'col-md-' + size;
     },
     players() {
       return this.$store.getters.getPlayers;
     },
     displayStyle() {
-      if(this.$store.getters.getTips.fact) {
-        return {'display':'block'}
+      if (this.$store.getters.getTips.fact) {
+        return {'display': 'block'}
       } else {
-          return {'display':'none'}
-        }
-      },
-      changeTrueFalse() {
-          if (this.$store.getters.trueFalseAnim)
-              return "trueFalse"
-          else
-              return ""
-      },
-      hasPlayed() {
-        if (this.$store.getters.getHasPlayed)
-            return "hasPlayed"
-        else
-            return ""
-      },
+        return {'display': 'none'}
+      }
+    },
+    changeTrueFalse() {
+      if (this.$store.getters.trueFalseAnim)
+        return "trueFalse"
+      else
+        return ""
+    },
+    hasPlayed() {
+      if (this.$store.getters.getHasPlayed)
+        return "hasPlayed"
+      else
+        return ""
+    },
     hand() {
-        let hand = this.$store.getters.getCurrentPlayerHand;
-        if (hand === null){
-          return []
-        } else {
-            return hand.cards
-        }
+      let hand = this.$store.getters.getCurrentPlayerHand;
+      if (hand === null) {
+        return []
+      } else {
+        return hand.cards
+      }
     },
     currentPlayerName() {
       return this.$store.getters.currentPlayerName;
     },
     activeSide() {
-        let activeSideString = String(this.$store.getters.getActiveSide)
-        return activeSideString.toUpperCase()
+      let activeSideString = String(this.$store.getters.getActiveSide)
+      return activeSideString.toUpperCase()
     }
   },
   components: {
@@ -135,10 +135,10 @@ export default {
       }
     },
     cardClicked (c) {
-      if(this.$store.getters.getTips.tutorial) {
+      if (this.$store.getters.getTips.tutorial) {
         this.tipsCardSelected = this.setTipBox(c);
       } else {
-          this.tipsCardSelected = this.setTipBox('default');
+        this.tipsCardSelected = this.setTipBox('default');
       }
       let prevActive = this.$store.getters.getActiveCard
 
@@ -151,53 +151,76 @@ export default {
       }
     },
     setTipBox(c) {
-        switch(c.type) {
-          case 'I' :
-            this.tipsInfoText = 'Instruction cards are the basis of any program, ' +
-              'and are thus the basic card that any player will start a “stack” ' +
-              '(i.e. Instruction cards with modifiers placed on them) with.';
-            return 'Instruction Card'; break;
-          case 'R' :
-            this.tipsInfoText = 'Repetition cards are used to emulate the action of a loop, ' +
-              'repeating an instruction a number of times. ' +
-              'Repetition cards need an instruction card as a base before they can be played on a playfield. ' +
-              'Once played on an instruction, ' +
-              'a Repetition card multiplies the value of the underlying Instruction card by the value printed ' +
-              'on the Repetition card.';
-            return 'Repetition card'; break;
+      switch (c.type) {
+        case 'I' :
+          this.tipsInfoText = 'Instruction cards are the basis of any program, ' +
+            'and are thus the basic card that any player will start a “stack” ' +
+            '(i.e. Instruction cards with modifiers placed on them) with.';
+          return 'Instruction Card';
+          break;
+        case 'R' :
+          this.tipsInfoText = 'Repetition cards are used to emulate the action of a loop, ' +
+            'repeating an instruction a number of times. ' +
+            'Repetition cards need an instruction card as a base before they can be played on a playfield. ' +
+            'Once played on an instruction, ' +
+            'a Repetition card multiplies the value of the underlying Instruction card by the value printed ' +
+            'on the Repetition card.';
+          return 'Repetition card';
+          break;
 
-          case 'V':
-            this.tipsInfoText = 'Variable cards are used in conjunction with Repetition X cards. ' +
-              'The value of the Variable card is then applied to the Repetition X card, ' +
-              'which specifies the value of X. ' +
-              'The value of X then becomes the multiplier for the underlying Instruction card.';
-            return 'Variable Card'; break;
+        case 'V':
+          this.tipsInfoText = 'Variable cards are used in conjunction with Repetition X cards. ' +
+            'The value of the Variable card is then applied to the Repetition X card, ' +
+            'which specifies the value of X. ' +
+            'The value of X then becomes the multiplier for the underlying Instruction card.';
+          return 'Variable Card';
+          break;
 
-          case 'H':
-            this.tipsInfoText = 'The Hack card can be played with ' +
-              'the purpose of removing cards from an opponent\'s stack. ' +
-              'When a Hack card is played, players specify a target for the Hack card, ' +
-              'and that stack is discarded. All cards are targetable by a ' +
-              'Hack card with the exception of Group cards.';
-            return 'Hack Card'; break;
+        case 'H':
+          this.tipsInfoText = 'The Hack card can be played with ' +
+            'the purpose of removing cards from an opponent\'s stack. ' +
+            'When a Hack card is played, players specify a target for the Hack card, ' +
+            'and that stack is discarded. All cards are targetable by a ' +
+            'Hack card with the exception of Group cards.';
+          return 'Hack Card';
+          break;
 
-          case 'G' :
-            this.tipsInfoText = 'Group cards are used to emulate the notion of a function, ' +
-              'essentially aggregating a set of instructions together into one unit. ' +
-              'Group cards are played on one or more stacks of cards. ' +
-              'In order to play a Group card ' +
-              'the total point value of each of the stacks must be equal to the value of the Group card.';
-            return 'Group Card'; break;
+        case 'G' :
+          this.tipsInfoText = 'Group cards are used to emulate the notion of a function, ' +
+            'essentially aggregating a set of instructions together into one unit. ' +
+            'Group cards are played on one or more stacks of cards. ' +
+            'In order to play a Group card ' +
+            'the total point value of each of the stacks must be equal to the value of the Group card.';
+          return 'Group Card';
+          break;
 
-          default :
-            var fact = this.setFact();
-            this.tipsInfoText = fact;
-            return 'Did you know?';
-        }
+        default :
+          var fact = this.setFact();
+          this.tipsInfoText = fact;
+          console.log(fact)
+          return 'Did you know?';
+      }
     },
     setFact() {
-      var num = Math.floor(Math.random() * this.facts.length);
-      return this.facts[num];
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          myFunction(this);
+        }
+      };
+      xhttp.open("GET", "static/facts.xml", false);
+      xhttp.send();
+      var xmlDoc
+      var factsArr;
+      function myFunction (xml) {
+        xmlDoc = xml.responseXML;
+        factsArr = Array.from(xmlDoc.getElementsByTagName('fact'));
+        console.log(typeof (xmlDoc.getElementsByTagName('fact')[1].childNodes[0].nodeValue))
+        var num = Math.floor(Math.random() * factsArr.length);
+        console.log(num)
+        return xmlDoc.getElementsByTagName('fact')[1].childNodes[0].nodeValue;
+      }
+
     },
     deselectAll () {
       document.removeEventListener('click', this.hide);
@@ -206,7 +229,7 @@ export default {
       this.$store.commit('setStackSelectedBoolean', {payload: undefined})
 
       this.$store.commit('setActiveCardUndefined');
-      if(this.hand !== undefined) {
+      if (this.hand !== undefined) {
         for (let card of this.hand) {
           card.selected = false
         }
@@ -228,17 +251,17 @@ export default {
       this.$store.commit('addCardToHand')
     });
     bus.$on('tutorialOff', () => {
-        this.tipsCardSelected = this.setTipBox('default');
+      this.tipsCardSelected = this.setTipBox('default');
     });
     bus.$on('tutorialOn', () => {
-        let c = this.$store.getters.getActiveCard;
-        if(c === undefined) {
-          this.tipsCardSelected = this.setTipBox('default');
-        } else {
-          this.tipsCardSelected = this.setTipBox(c);
+      let c = this.$store.getters.getActiveCard;
+      if (c === undefined) {
+        this.tipsCardSelected = this.setTipBox('default');
+      } else {
+        this.tipsCardSelected = this.setTipBox(c);
 
-        }
-    })
+      }
+    });
   }
 }
 </script>
