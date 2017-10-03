@@ -120,7 +120,7 @@
       },
       submitPlayers() {
         this.$store.commit('addPlayers', {list: this.localPlayers});
-        this.$store.commit('setScoreLimit', {scoreLimit: this.selected})
+        this.$store.commit('setScoreLimit', {scoreLimit: this.selected});
         this.gameStart = true;
 
         setTimeout(() => {
