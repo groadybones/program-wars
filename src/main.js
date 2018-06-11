@@ -9,16 +9,6 @@ import { store }  from './store/store'
 
 Vue.use(VueFire);
 
-// Initialize Firebase
-var config = {
-  apiKey: "AIzaSyABctVOAOi6xpr_5cF6Rp93MjsO1Uj-jJc",
-  authDomain: "programming-wars.firebaseapp.com",
-  databaseURL: "https://programming-wars.firebaseio.com",
-  projectId: "programming-wars",
-  storageBucket: "programming-wars.appspot.com",
-  messagingSenderId: "543791998135"
-};
-firebase.initializeApp(config);
 
 //Vue.http.options.root = 'https://programming-wars.firebaseio.com';
 
@@ -29,5 +19,15 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  created() {
+    firebase.initializeApp({
+      apiKey: "AIzaSyABctVOAOi6xpr_5cF6Rp93MjsO1Uj-jJc",
+      authDomain: "programming-wars.firebaseapp.com",
+      databaseURL: "https://programming-wars.firebaseio.com",
+      projectId: "programming-wars",
+      storageBucket: "programming-wars.appspot.com",
+      messagingSenderId: "543791998135"
+    });
+  }
 })
