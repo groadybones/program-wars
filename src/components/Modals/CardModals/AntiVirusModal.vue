@@ -75,10 +75,7 @@
       }
     },
     created() {
-      $('.antiVirus').modal({
-        backdrop: 'static',
-        keyboard: false
-      })
+      
     }
 
   }
