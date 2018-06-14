@@ -77,10 +77,10 @@
       }
     },
     created() {
-      $('.overclock').modal({
-        backdrop: 'static',
-        keyboard: false
-      })
+      // $('.overclock').modal({
+      //   backdrop: 'static',
+      //   keyboard: false
+      // })
     }
 
   }

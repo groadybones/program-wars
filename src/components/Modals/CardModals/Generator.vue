@@ -74,10 +74,10 @@
       }
     },
     created() {
-      $('.generator').modal({
-        backdrop: 'static',
-        keyboard: false
-      })
+      // $('.generator').modal({
+      //   backdrop: 'static',
+      //   keyboard: false
+      // })
     }
 
   }

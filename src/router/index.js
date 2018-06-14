@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import MainComponent from 'components/MainGame/MainComponent'
 import SettingsComponent from 'components/SharedComponents/SettingsComponent'
 import TutorialComponent from '../components/Tutorial/TutorialComponent.vue'
+import 'bootstrap';
 
 Vue.use(Router)
 

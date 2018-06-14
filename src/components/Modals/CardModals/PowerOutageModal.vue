@@ -73,10 +73,10 @@
       },
     },
     created() {
-      $('.powerOutage').modal({
-        backdrop: 'static',
-        keyboard: false
-      })
+      // $('.powerOutage').modal({
+      //   backdrop: 'static',
+      //   keyboard: false
+      // })
     }
 
   }

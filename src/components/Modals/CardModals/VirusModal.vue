@@ -71,10 +71,10 @@
       },
     },
     created() {
-      $('.virus').modal({
-        backdrop: 'static',
-        keyboard: false
-      })
+      // $('.virus').modal({
+      //   backdrop: 'static',
+      //   keyboard: false
+      // })
     }
 
   }

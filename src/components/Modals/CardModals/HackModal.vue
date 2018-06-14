@@ -68,10 +68,10 @@
       }
     },
     created() {
-      $('.hack').modal({
-        backdrop: 'static',
-        keyboard: false
-      })
+      // $('.hack').modal({
+      //   backdrop: 'static',
+      //   keyboard: false
+      // })
     }
 
   }
