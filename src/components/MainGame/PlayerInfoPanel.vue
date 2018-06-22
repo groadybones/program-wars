@@ -74,7 +74,8 @@ import Card from '../SharedComponents/Card'
 import Modal from '../Modals/Modal'
 import StatsPanel from '../SharedComponents/StatsPanel'
 import DisplayUsedCards from '../SharedComponents/DisplayUsedCards'
-
+var htmlToText = require('html-to-text')
+var path = require('path')
 import {mapGetters, mapState, mapActions, mapMutations} from 'vuex'
 
 export default {
@@ -352,6 +353,12 @@ export default {
       }
     },
     created: function () {
+      htmlToText.fromFile(path.join('../../data', 'test.html'), {
+        tables: ['#invoice', '.address']
+      }, (err, text) => {
+        if (err) return console.error(err)
+        console.log(text)
+      })
       bus.$on('hackCanceled', () => {
         this.deselectAll()
       })
