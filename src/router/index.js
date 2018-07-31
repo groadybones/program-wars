@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import MainComponent from 'components/MainGame/MainComponent'
 import SettingsComponent from 'components/SharedComponents/SettingsComponent'
 import TutorialComponent from '../components/Tutorial/TutorialComponent.vue'
+import ChallengeComponent from 'components/Challenge/ChallengeComponent.vue'
 
 Vue.use(Router)
 
@@ -25,6 +26,12 @@ export default new Router({
       canReuse: false,
       name: 'settings-component',
       component: SettingsComponent
+    },
+    {
+      path: '/challenge',
+      canReuse: false,
+      name: 'challenge-component',
+      component: ChallengeComponent
     },
     {path: '*', redirect: '/'}
   ],

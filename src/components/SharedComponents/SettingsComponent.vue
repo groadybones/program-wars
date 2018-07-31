@@ -54,6 +54,7 @@
       <div id="HASH" class="row">
         <div id="HASH2" class="col-md-12" style="text-align: right">
           <button type="button" class="btn btn-primary" @click="startTutorial" data-toggle="modal" data-target=".tutorial">Take the Tutorial</button>
+          <button type="button" class="btn btn-primary" @click="startChallengeMode">Challenge Mode</button>
           <button type="button" class="btn btn-primary" @click="submitPlayers" :disabled="noPlayers">Start New Game</button>
         </div>
       </div>
@@ -96,7 +97,8 @@
         aiOpponents: ['Flash', 'Joker', 'Aquaman', 'Superman'],
         typesOfGames: ['Short (100)', 'Medium (150)', 'Long (200)'],
         isTutorial: false,
-        tutorialBegin: false
+        tutorialBegin: false,
+        randomScore: 0
       }
     },
     methods: {
@@ -107,7 +109,8 @@
         'getTutorialState'
       ]),
       ...mapMutations([
-        'setTutorial'
+        'setTutorial',
+        'setChallenge'
       ]),
       ...mapState([
         'mainTextColour',
@@ -158,6 +161,26 @@
         this.gameStart = true
         setTimeout(() => {
           this.$router.push('tutorial')
+        }, 100)
+      },
+
+      randomScoreLimit (min, max) {
+        return Math.floor(Math.random() * (max - min) + min)
+      },
+
+      /**
+       * Starts the challenge mode.
+       */
+      startChallengeMode () {
+        this.localPlayers = []
+        this.setChallenge(true)
+        this.localPlayers.push({name: 'You', isAi: false})
+        this.$store.commit('addPlayers', {list: this.localPlayers})
+        this.randomScore = this.randomScoreLimit(20, 150)
+        this.$store.commit('setScoreLimit', {scoreLimit: this.randomScore})
+        this.gameStart = true
+        setTimeout(() => {
+          this.$router.push('challenge')
         }, 100)
       },
 

@@ -130,6 +130,9 @@ export default {
   },
   getTimerInterval (state) {
     return state.timerInterval
+  },
+  getPreparingChallenge (state) {
+    return state.preparingChallenge
   }
 }
 

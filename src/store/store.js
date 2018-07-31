@@ -8,6 +8,7 @@ import mutations from './mutations.js'
 import getters from './getters.js'
 import Deck from '../classes/Models/Deck'
 import TutorialDeck from '../classes/Models/TutorialDeck.js'
+import ChallengeDeck from '../classes/Models/ChallengeDeck'
 
 /**
  * The store holds all of the information that vuex will store and use. The functions are seperated into different files.
@@ -19,7 +20,9 @@ export const store = new Vuex.Store({
     stacks: [],
     deck: new Deck(),
     tutorialDeck: new TutorialDeck(),
+    challengeDeck: new ChallengeDeck(),
     isTutorial: false,
+    isChallenge: false,
     hands: [],
     currentGameState: 'newGame',
     displayObjModal: false,
@@ -59,7 +62,8 @@ export const store = new Vuex.Store({
     factIndex: 0,
     tutorialStep: true,
     tutorialOver: false,
-    timerInterval: undefined
+    timerInterval: undefined,
+    preparingChallenge: false
   },
 
   originalState: {

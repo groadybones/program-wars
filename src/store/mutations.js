@@ -33,6 +33,7 @@ export default {
     state.aiTurn = false
     state.playerTurn = false
     state.isTutorial = false
+    state.isChallenge = false
     state.factIndex = 0
     state.tutorialStep = true
     state.trueSideColour = 'background-color: #80aef7; box-shadow: 0px 3px 15px rgba(0,0,0,0.6)'
@@ -81,6 +82,8 @@ export default {
     for (let i = 0; i < 5; i++) {
       if (state.isTutorial) {
         cardsTemp.push(localState.tutorialDeck.draw())
+      } else if (state.isChallenge) {
+        cardsTemp.push(localState.challengeDeck.draw())
       } else {
         cardsTemp.push(localState.deck.draw())
       }
@@ -100,6 +103,18 @@ export default {
       if (state.hands.find(hand => hand.playerId === state.activePlayer).cards.length < 6) {
         do {
           state.hands.find(hand => hand.playerId === state.activePlayer).cards.push(state.tutorialDeck.cards.pop())
+        } while (state.hands.find(hand => hand.playerId === state.activePlayer).cards.length < 6)
+      }
+    } else if (state.isChallenge) {
+      if (state.challengeDeck.cards.length <= 1 && state.challengeDeck.discard_cards.length > 0) {
+        for (let i = 0; i < state.challengeDeck.discard_cards.length; i++) {
+          state.challengeDeck.cards.push(state.challengeDeck.discard_cards[i])
+        }
+        state.challengeDeck.discard_cards = []
+      }
+      if (state.hands.find(hand => hand.playerId === state.activePlayer).cards.length < 6 && state.firstRound) {
+        do {
+          state.hands.find(hand => hand.playerId === state.activePlayer).cards.push(state.challengeDeck.cards.pop())
         } while (state.hands.find(hand => hand.playerId === state.activePlayer).cards.length < 6)
       }
     } else {
@@ -122,6 +137,9 @@ export default {
   },
   initTutorialDeck (state) {
     state.tutorialDeck.initDeck(state.players.length)
+  },
+  initChallengeDeck (state) {
+    state.challengeDeck.initDeck(1)
   },
   setTutorial (state, payload) {
     state.isTutorial = payload.gameType
@@ -167,6 +185,8 @@ export default {
     let card = state.stacks.find(stack => stack.stackId === payload.stackId).popTopCard()
     if (state.isTutorial) {
       state.tutorialDeck.discard_cards.push(card)
+    } else if (state.isChallenge) {
+      state.challengeDeck.discard_cards.push(card)
     } else {
       state.deck.discard_cards.push(card)
     }
@@ -176,6 +196,8 @@ export default {
     tempActiveCard.selected = false
     if (state.isTutorial) {
       state.tutorialDeck.discard_cards.push(tempActiveCard)
+    } else if (state.isChallenge) {
+      state.challengeDeck.discard_cards.push(tempActiveCard)
     } else {
       state.deck.discard_cards.push(tempActiveCard)
     }
@@ -277,13 +299,23 @@ export default {
       if (!player.hasVirus) {
         player.virusBonus = 10
       }
-
-      if ((scoreTrue >= state.scoreLimit) || (scoreFalse >= state.scoreLimit)) {
-        if ((scoreTrue > highScore) || (scoreFalse > highScore)) {
-          highScore = Math.max(scoreTrue, scoreFalse)
-          state.winnerName = player.name
-          state.winnerScore = Math.max(scoreTrue, scoreFalse)
-          state.winner = true
+      if (!state.isChallenge) {
+        if ((scoreTrue >= state.scoreLimit) || (scoreFalse >= state.scoreLimit)) {
+          if ((scoreTrue > highScore) || (scoreFalse > highScore)) {
+            highScore = Math.max(scoreTrue, scoreFalse)
+            state.winnerName = player.name
+            state.winnerScore = Math.max(scoreTrue, scoreFalse)
+            state.winner = true
+          }
+        }
+      } else {
+        if ((scoreTrue === state.scoreLimit) || (scoreFalse === state.scoreLimit)) {
+          if ((scoreTrue > highScore) || (scoreFalse > highScore)) {
+            highScore = Math.max(scoreTrue, scoreFalse)
+            state.winnerName = player.name
+            state.winnerScore = Math.max(scoreTrue, scoreFalse)
+            state.winner = true
+          }
         }
       }
     }
@@ -473,6 +505,15 @@ export default {
     state.mainTextColour = payload.mainTC
     state.pIPBackgroundColour = payload.playfieldBC
     state.pIPTextColour = payload.playfieldTC
+  },
+  setChallenge (state, payload) {
+    state.isChallenge = payload
+  },
+  setPreparingChallenge (state, payload) {
+    state.preparingChallenge = payload
+  },
+  runningChallengeValidation (state) {
+    console.log('to be implemented')
   }
 }
 
