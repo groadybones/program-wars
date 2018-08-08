@@ -13,27 +13,27 @@ export default class Tree {
     this.parentNode = this.root
     let instIndices
     let level = -1
-      console.log(JSON.stringify(this.currentNode.value))
-      console.log('length ' + JSON.stringify(this.currentNode.value.cards.length))
-      if (level === -1) {
-        instIndices = this.instructionsIndices()
-        ++level
-      } else {
-        instIndices = undefined
-      }
-      if (instIndices !== undefined) {
-        if (instIndices.length !== 0) {
-          for (let c = instIndices.length - 1; c >= 0; c--) {
-            if (this.currentNode.value.cards[instIndices[c]].type === 'I') {
-              this.currentNode.value.scores.push(this.currentNode.value.cards[instIndices[c]].value)
-              this.currentNode.value.cards.splice(instIndices[c], 1)
-            }
+    console.log(JSON.stringify(this.currentNode.value))
+    console.log('length ' + JSON.stringify(this.currentNode.value.cards.length))
+    if (level === -1) {
+      instIndices = this.instructionsIndices()
+      ++level
+    } else {
+      instIndices = undefined
+    }
+    if (instIndices !== undefined) {
+      if (instIndices.length !== 0) {
+        for (let c = instIndices.length - 1; c >= 0; c--) {
+          if (this.currentNode.value.cards[instIndices[c]].type === 'I') {
+            this.currentNode.value.scores.push(this.currentNode.value.cards[instIndices[c]].value)
+            this.currentNode.value.cards.splice(instIndices[c], 1)
           }
-        } else if (instIndices === undefined && level === -1) {
-          console.log('to be implemented, maybe return false') // needs to redraw
         }
+      } else if (instIndices === undefined && level === -1) {
+        console.log('to be implemented, maybe return false') // needs to redraw
       }
-    while (level < 6) {
+    }
+    while (this.currentNode.value.cards === []) {
       for (let node in this.parentNode.value.children) {
         console.log('node: ' + node)
 
@@ -48,7 +48,7 @@ export default class Tree {
         this.parentNode = this.currentNode
       }
       console.log('scores: ' + this.currentNode.value.scores)
-      level = 7
+      ++level
     }
   }
 
