@@ -1,6 +1,6 @@
 export default class Node {
-  constructor (value, fC, sC, tC, fourthChild, fifthChild, sixthChild) {
-    this.value = {cards: value, scores: []}
-    this.children = [fC, sC, tC, fourthChild, fifthChild, sixthChild]
+  constructor (value, scores = []) {
+    this.value = {cards: value.slice(0), scores: scores, nodeScore: 0}
+    this.children = []
   }
 }

@@ -172,7 +172,8 @@
         'setFirstRound',
         'resetState',
         'stopTimer',
-        'setPreparingChallenge'
+        'setPreparingChallenge',
+        'validateChallenge'
 
       ]),
       ...mapActions([
@@ -256,9 +257,7 @@
           this.setGameState({gameState: 'waitingForPlayerInput'})
           this.gameStart = true
         } else if (gameState === 'startPlayerTurn') {
-          this.addCardToHand()
           this.setGameState({gameState: 'playerTurn'})
-
           if (this.getCurrentPlayerId() === 0) {
             j = Math.floor(Math.random() * 2)
             this.setTrueFalseAnim({startAnim: true})
@@ -283,8 +282,10 @@
       this.initGame()
       this.fillHands()
       this.addStacksToPlayers()
-
       this.setGameState({gameState: 'startPlayerTurn'})
+
+      this.addCardToHand()
+      this.validateChallenge()
     },
     /**
      * Called when the component is mounted to show the modals in a correct order

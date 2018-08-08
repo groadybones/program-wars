@@ -512,8 +512,9 @@ export default {
   setPreparingChallenge (state, payload) {
     state.preparingChallenge = payload
   },
-  runningChallengeValidation (state) {
-    console.log('to be implemented')
+  validateChallenge (state) {
+    console.log('cards ' + JSON.stringify(state.hands[0]))
+    state.challengeTree.createTree(state.hands[0].cards)
   }
 }
 

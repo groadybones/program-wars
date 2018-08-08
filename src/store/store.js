@@ -9,6 +9,7 @@ import getters from './getters.js'
 import Deck from '../classes/Models/Deck'
 import TutorialDeck from '../classes/Models/TutorialDeck.js'
 import ChallengeDeck from '../classes/Models/ChallengeDeck'
+import ChallengeTree from '../classes/Structures/ChallengeTree'
 
 /**
  * The store holds all of the information that vuex will store and use. The functions are seperated into different files.
@@ -63,7 +64,8 @@ export const store = new Vuex.Store({
     tutorialStep: true,
     tutorialOver: false,
     timerInterval: undefined,
-    preparingChallenge: false
+    preparingChallenge: false,
+    challengeTree: new ChallengeTree()
   },
 
   originalState: {
