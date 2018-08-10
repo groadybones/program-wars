@@ -22,6 +22,7 @@ export default class Tree {
     } else {
       instIndices = undefined
     }
+    let numRepeats = instIndices.length - 6
     // if theres any instruction add their values into the roots 'scores' array
     if (instIndices !== undefined) {
       if (instIndices.length !== 0) {
@@ -46,29 +47,37 @@ export default class Tree {
       }
     }
     console.log('parent: ' + JSON.stringify(this.parentNode))
-    while (this.currentNode.value.cards.length !== 0) {
-      let tempParent = this.parentNode
-      for (let child in tempParent.children) {
-        // console.log('in the while loop')
-        for (let node in this.parentNode.children) {
-          console.log('node: ' + node)
-          this.currentNode = this.parentNode.children[node]
-          // console.log('value: ' + JSON.stringify(this.currentNode.value))
-          for (let score in this.currentNode.value.scores) {
-            console.log('current score: ' + score)
-            for (let remainingCard in this.currentNode.value.cards) {
-              console.log('remaining card: ' + JSON.stringify(this.currentNode.value.cards[remainingCard].value))
-              let tempScores = this.currentNode.value.scores
-              tempScores[score] += this.currentNode.value.cards[remainingCard].value
-              this.currentNode.children.push(new Node(this.currentNode.value.cards.slice(remainingCard), tempScores))
-            }
-          }
-        }
-        this.parentNode = tempParent.children[child]
-        console.log('scores: ' + this.currentNode.value.scores)
-        console.log('currentNode: ' + JSON.stringify(this.currentNode.children))
+    for (let firstChild in this.parentNode) {
+      let tempScores = this.currentNode.value.scores.slice(0)
+      tempScores[score] += this.currentNode.value.cards[remainingCard].value
+      this.currentNode.children.push(new Node(this.currentNode.value.cards.slice(remainingCard), tempScores))
+      while (this.currentNode.cards.length !== 0) {
+        
       }
     }
+    // while (this.currentNode.value.cards.length !== 0) {
+    //   let tempParent = this.parentNode
+    //   for (let child in tempParent.children) {
+    //     // console.log('in the while loop')
+    //     for (let node in this.parentNode.children) {
+    //       console.log('node: ' + node)
+    //       this.currentNode = this.parentNode.children[node]
+    //       // console.log('value: ' + JSON.stringify(this.currentNode.value))
+    //       for (let score in this.currentNode.value.scores) {
+    //         console.log('current score: ' + score)
+    //         for (let remainingCard in this.currentNode.value.cards) {
+    //           console.log('remaining card: ' + JSON.stringify(this.currentNode.value.cards[remainingCard].value))
+    //           let tempScores = this.currentNode.value.scores
+    //           tempScores[score] += this.currentNode.value.cards[remainingCard].value
+    //           this.currentNode.children.push(new Node(this.currentNode.value.cards.slice(remainingCard), tempScores))
+    //         }
+    //       }
+    //     }
+    //     this.parentNode = tempParent.children[child]
+    //     console.log('scores: ' + this.currentNode.value.scores)
+    //     console.log('currentNode: ' + JSON.stringify(this.currentNode.children))
+    //   }
+    // }
   }
 
   instructionsIndices () {
