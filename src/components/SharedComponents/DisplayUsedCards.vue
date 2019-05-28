@@ -44,9 +44,16 @@
   export default {
     data () {
       return {
-        player: this.getCurrentPlayer()
+        player: this.getCurrentPlayer()// ,
+        // showCardEffect: null,
+        // cardEffect: showCardEffect(card)
       }
     },
+    /* created () {
+      Bus.$on('cardEffect', (showCardEffect) => {
+      this.showCardEffect = showCardEffect;
+      });
+    }, */
     components: {
       'card': Card
 
