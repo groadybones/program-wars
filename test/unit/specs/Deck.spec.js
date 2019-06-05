@@ -1,9 +1,9 @@
-import Deck from '../../../src/classes/Models/Deck'
+// import Deck from '../../../src/classes/Models/Deck'
 // import Card from '../../../src/classes/Card'
 
 describe('Deck.js', () => {
   // test initial cards array length
-  it('test if the initial cards array is empty', () => {
+  /* it('test if the initial cards array is empty', () => {
     let testDeck = new Deck()
     expect(testDeck.cards.length).to.equal(0)
   })
@@ -337,5 +337,5 @@ describe('Deck.js', () => {
       expect(idx.value).to.not.equal(shuffledDeck.cards[counter])
       counter++
     }
-  })
+  }) */
 })

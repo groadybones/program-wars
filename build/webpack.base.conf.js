@@ -48,9 +48,15 @@ module.exports = {
         options: vueLoaderConfig
       },
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')]
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            babelrc: false,
+            presets: ['@babel/preset-env']
+          }
+        },
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

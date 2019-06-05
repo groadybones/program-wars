@@ -1,4 +1,4 @@
-/* eslint-disable no-trailing-spaces */
+/* eslint-disable no-trailing-spaces 
 var sinon = require('sinon')
 import {store} from '../../../src/store/store'
 import Card from '../../../src/classes/Models/Card'
@@ -78,10 +78,10 @@ let vSpy = sinon.spy(actionObject.vAction, 'execute')
 let poSpy = sinon.spy(actionObject.poAction, 'execute')
 
 let handler = new Handler(oPO, oV, actionObject.avAction, actionObject.fwAction, actionObject.genAction, actionObject.ocAction, actionObject.bbAction, actionObject.gAction,
-  actionObject.vAction, actionObject.hAction, actionObject.poAction, actionObject.iAction, actionObject.rAction, actionObject.rxAction, actionObject.varAction, actionObject.dAction)
+  actionObject.vAction, actionObject.hAction, actionObject.poAction, actionObject.iAction, actionObject.rAction, actionObject.rxAction, actionObject.varAction, actionObject.dAction) */
 
 describe('AILogic', () => {
-  it('calls execute() correctly', () => {
+  /* it('calls execute() correctly', () => {
     store.state.activePlayer = 0
     store.state.players = [player, player2]
     store.state.coinMsg = true
@@ -211,5 +211,5 @@ describe('AILogic', () => {
       actionObject[action].setHand(hand)
       actionObject[action].setEvent(event)
     }
-  }
+  } */
 })

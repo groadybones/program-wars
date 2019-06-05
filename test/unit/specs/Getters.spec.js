@@ -1,11 +1,11 @@
 /* eslint-disable no-trailing-spaces */
-import {store} from '../../../src/store/store'
+// import {store} from '../../../src/store/store'
 import Card from '../../../src/classes/Models/Card'
 
-let card = new Card(55, 3, 'I', 'f')
-let card2 = new Card(34, 2, 'R', 'v')
+// let card = new Card(55, 3, 'I', 'f')
+// let card2 = new Card(34, 2, 'R', 'v')
 describe('test store.js getters', () => {
-  it('test the store getCurrentPlayerId function', () => {
+  /* it('test the store getCurrentPlayerId function', () => {
     store.state.activePlayer = 0
     expect(store.getters.getCurrentPlayerId).to.equal(0)
   })
@@ -121,5 +121,5 @@ describe('test store.js getters', () => {
     store.commit('addStackToPlayer', {playerId: 1, boolSide: true})
     store.commit('addStackToPlayer', {playerId: 1, boolSide: false})
     expect(store.getters.getAiDependent.hand.cards[0].type).to.equal('R')
-  })
+  }) */
 })

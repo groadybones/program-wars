@@ -8,6 +8,9 @@
   "env": {
     "test": {
       "plugins": [ "istanbul" ]
-    }
+    }/* ,
+    "vtest": {
+      "plugins": [ "jest" ]
+    } */
   }
 }

@@ -1,3 +1,7 @@
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 var path = require('path')
 var utils = require('./utils')
 var webpack = require('webpack')
@@ -18,20 +22,49 @@ var webpackConfig = merge(baseWebpackConfig, {
     })
   },
   devtool: config.build.productionSourceMap ? '#source-map' : false,
+  mode: 'production',
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        // warnings: false
+      }),
+    ],
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          name: 'vendors',
+          chunks: 'all',
+          reuseExistingChunk: true,
+          priority: 1,
+          enforce: true,
+          test(module, chunks) {
+            const name = module.resource && /\.js$/.test(module.resource) && module.resource.indexOf(path.join(__dirname, '../node_modules'));
+            return chunks.some(chunk => {
+              return chunk.name === 'main' && /[\\/]node_modules[\\/]/.test(name);
+            });
+          }
+        },
+        secondary: {
+          name: 'secondary',
+          chunks: 'all',
+          priority: 2,
+          enforce: true,
+          test(module, chunks) {
+              return chunks.some(chunk => chunk.name === 'secondary');
+          }
+        }
+      }
+    }
+  },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
     }),
     // extract css into its own file
     new ExtractTextPlugin({
@@ -56,8 +89,12 @@ var webpackConfig = merge(baseWebpackConfig, {
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
     }),
+    new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'style.css'
+    }),
     // split vendor js into its own file
-    new webpack.optimize.CommonsChunkPlugin({
+    /* new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: function (module, count) {
         // any required modules inside node_modules are extracted to vendor
@@ -75,7 +112,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       chunks: ['vendor']
-    })
+    }) */
   ]
 })
 
