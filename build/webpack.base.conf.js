@@ -1,7 +1,10 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+var isDev = process.env.NODE_ENV
+// var helpers = 
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -9,6 +12,8 @@ function resolve (dir) {
 
 module.exports = {
   entry: {
+    polyfill: '@babel/polyfill',
+    // main: helpers.root('src', 'main'),
     app: './src/main.js'
   },
   output: {
@@ -25,7 +30,9 @@ module.exports = {
       resolve('node_modules')
     ],
     alias: {
-      'vue$': 'vue/dist/vue.common.js',
+      'vue$': isDev ? 'vue/dist/vue.runtime.js' :
+      'vue/dist/vue.runtime.min.js',
+      // '@': helpers.root('src'),
       'src': resolve('src'),
       'assets': resolve('src/assets'),
       'components': resolve('src/components')
@@ -45,18 +52,43 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: vueLoaderConfig
+        // include: [ helpers.root('src') ]
+        // options: vueLoaderConfig
       },
       {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
+          // include: [helpers.root('src')],
           options: {
-            babelrc: false,
+            // babelrc: false,
             presets: ['@babel/preset-env']
           }
         },
+      },
+      {
+        test: /\.css$/,
+        use: [
+          isDev ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
+          { loader: 'css-loader', options: { sourceMap: isDev } },
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          isDev ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
+          { loader: 'css-loader', options: { sourceMap: isDev } },
+          { loader: 'sass-loader', options: { sourceMap: isDev } }
+        ]
+      },
+      {
+        test: /\.sass$/,
+        use: [
+          isDev ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
+          { loader: 'css-loader', options: { sourceMap: isDev } },
+          { loader: 'sass-loader', options: { sourceMap: isDev } }
+        ]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
