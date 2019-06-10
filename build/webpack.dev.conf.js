@@ -4,12 +4,15 @@ var config = require('../config')
 var merge = require('webpack-merge')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+var baseWebpackConfig = require('./webpack.base.conf')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
   baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
 })
-var baseWebpackConfig = require('./webpack.base.conf')
+// var baseWebpackConfig = require('./webpack.base.conf')
 
 module.exports = merge(baseWebpackConfig, {
   module: {
@@ -19,7 +22,7 @@ module.exports = merge(baseWebpackConfig, {
   devtool: 'cheap-module-eval-source-map',
   mode: 'development',
   output: {
-    path: helpers.root('dist'),
+    // path: helpers.root('dist'),
     publicPath: '/',
     filename: 'js/[name].bundle.js',
     chunkFilename: 'js/[id].chunk.js'
@@ -44,6 +47,11 @@ module.exports = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true
     }),
-    new FriendlyErrorsPlugin()
+    new FriendlyErrorsPlugin(),
+    new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    })
   ]
 })

@@ -5,7 +5,7 @@
   "author": "John Anvik <johnanvik@uleth.ca>",
   "private": true,
   "scripts": {
-    "dev": "node build/dev-server.js",
+    "dev": "webpack --config build/webpack.dev.conf.js",
     "build": "webpack --config build/webpack.prod.conf.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
@@ -19,7 +19,7 @@
     "jsdoc-vue": "^1.0.0",
     "vue": "^2.6.10",
     "vue-radial-progress": "^0.2.10",
-    "vue-router": "^2.2.0",
+    "vue-router": "^3.0.6",
     "vuex": "^2.2.1"
   },
   "devDependencies": {

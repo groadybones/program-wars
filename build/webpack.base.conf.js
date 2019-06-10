@@ -1,8 +1,9 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
-var vueLoaderConfig = require('./vue-loader.conf')
+// var vueLoaderConfig = require('./vue-loader.conf')
 var isDev = process.env.NODE_ENV
 // var helpers = 
 
@@ -14,7 +15,8 @@ module.exports = {
   entry: {
     polyfill: '@babel/polyfill',
     // main: helpers.root('src', 'main'),
-    app: './src/main.js'
+    app: './src/main.js',
+    index: './src/router/index.js'
   },
   output: {
     path: config.build.assetsRoot,
@@ -22,6 +24,12 @@ module.exports = {
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
+  },
+  optimization: {
+    // runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all'
+    }
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],

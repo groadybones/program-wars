@@ -29,7 +29,7 @@ exports.cssLoaders = function (options) {
     // Extract CSS when that option is specified
     // (which is the case during production build)
     if (options.extract) {
-      /* return MiniCssExtractPlugin.extract({
+      /* return new MiniCssExtractPlugin({
         use: [
           process.env.NODE_ENV !== 'production'
             ? 'vue-style-loader'
@@ -42,7 +42,7 @@ exports.cssLoaders = function (options) {
     }
   }
 
-  // Below: depracated
+  // Below: deprecated
   // http://vuejs.github.io/vue-loader/en/configurations/extract-css.html
   return {
     css: generateLoaders(['css']),

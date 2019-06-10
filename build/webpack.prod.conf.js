@@ -71,7 +71,6 @@ var webpackConfig = merge(baseWebpackConfig, {
     new ExtractTextPlugin({
       filename: 'build.min.css',
       allChunks: true
-      // filename: utils.assetsPath('css/[name].[contenthash].css')
     }),
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
@@ -94,7 +93,8 @@ var webpackConfig = merge(baseWebpackConfig, {
     }),
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'style.css'
+      filename: '[name].css',
+      chunkFilename: '[id].css'
     }),
     // split vendor js into its own file
     /* new webpack.optimize.CommonsChunkPlugin({
