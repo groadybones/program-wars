@@ -26,8 +26,9 @@ var webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
   output: {
     path: config.build.assetsRoot,
-    filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+    publicPath: path.resolve(__dirname, 'dist', '/'),
+    filename: 'js/[name].[chunkhash].js',
+    chunkFilename: 'js/[id].[chunkhash].js'
   },
   optimization: {
     minimizer: [

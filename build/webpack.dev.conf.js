@@ -22,7 +22,7 @@ module.exports = merge(baseWebpackConfig, {
   devtool: 'cheap-module-eval-source-map',
   mode: 'development',
   output: {
-    // path: helpers.root('dist'),
+    path: config.build.assetsRoot,
     publicPath: '/',
     filename: 'js/[name].bundle.js',
     chunkFilename: 'js/[id].chunk.js'

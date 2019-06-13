@@ -16,7 +16,7 @@ module.exports = {
     polyfill: '@babel/polyfill',
     // main: helpers.root('src', 'main'),
     app: './src/main.js',
-    index: './src/router/index.js'
+    // index: './src/router/index.js'
   },
   output: {
     path: config.build.assetsRoot,

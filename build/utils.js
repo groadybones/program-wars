@@ -29,14 +29,14 @@ exports.cssLoaders = function (options) {
     // Extract CSS when that option is specified
     // (which is the case during production build)
     if (options.extract) {
-      /* return new MiniCssExtractPlugin({
+      /*return new MiniCssExtractPlugin({
         use: [
           process.env.NODE_ENV !== 'production'
             ? 'vue-style-loader'
             : MiniCssExtractPlugin.loader,
-          sourceLoader
+          { loader: sourceLoader, options: { sourceMap: process.env.NODE_ENV} }
         ]
-      }) */
+      })*/
     } else {
       return ['vue-style-loader', sourceLoader].join('!')
     }
